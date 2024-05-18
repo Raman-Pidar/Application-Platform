@@ -1,24 +1,43 @@
-import logo from './logo.svg';
+import {  useState, useEffect, Fragment } from 'react';
 import './App.css';
+import { Filter } from './components/filter/filter';
+import { JobListPage } from './components/page/jobListing';
 
 function App() {
+
+  const [data, setData] = useState(null);
+
+  useEffect(()=>{
+
+    const myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    
+    const body = JSON.stringify({
+     "limit": 10,
+     "offset": 0
+    });
+    
+    const requestOptions = {
+     method: "POST",
+     headers: myHeaders,
+     body
+    };
+
+    fetch("https://api.weekday.technology/adhoc/getSampleJdJSON", requestOptions)
+     .then((response) => response.json())
+     .then((result) => setData(result))
+     .catch((error) => console.error(error));
+    
+  },[])
+
+  console.log(data);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Fragment>
+      <Filter />
+      {data && <JobListPage jdList={data.jdList}/>}
+    </Fragment>
+      
   );
 }
 
