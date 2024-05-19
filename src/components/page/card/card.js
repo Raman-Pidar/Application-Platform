@@ -1,4 +1,6 @@
-import { Avatar, Box, Button, Paper, Typography } from "@mui/material";
+import { useState } from "react";
+
+import { Avatar, Button, Typography } from "@mui/material";
 import ElectricBoltTwoToneIcon from "@mui/icons-material/ElectricBoltTwoTone";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
 import "./card.css";
@@ -18,21 +20,13 @@ export const JobCard = ({ jd }) => {
     salaryCurrencyCode,
   } = jd;
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const openModal = () => setIsModalOpen(true);
+  const onClose = () => setIsModalOpen(false);
+
   return (
-    // <div className="cardContainer">
-    //     <img className="icon" src={logoUrl} alt='logo'/>
-    //     {jobRole}
-    // </div>
     <>
-      <Box key={jdUid}>
-        <Paper
-          elevation={1}
-          sx={{
-            borderRadius: "1rem",
-            padding: "0.5rem",
-            border: "1px solid lightGrey"
-          }}
-        >
+      <div className="cardContainer" key={jdUid}>
           <div
             style={{
               display: "flex",
@@ -56,7 +50,7 @@ export const JobCard = ({ jd }) => {
                 {" "}
                 {jobRole.toUpperCase()}{" "}
               </span>
-              <span style={{ fontSize: "0.7rem" }}>
+              <span style={{ fontSize: "0.8rem" }}>
                 {" "}
                 <b>{location.toUpperCase()}</b>
               </span>
@@ -83,15 +77,19 @@ export const JobCard = ({ jd }) => {
           <Typography variant="subtitle2" component="body" sx={{flexGrow:'2'}}>
             <b> About us </b>
             <br />
-            <span>
-            {jobDetailsFromCompany.slice(0,370)}</span>
+            <p>
+            {jobDetailsFromCompany.slice(0,300)}</p>
+              <span>
+                <Button onClick={openModal} sx={{textTransform:'none',justifyContent: "center" }}>
+                  View job</Button>
+              </span>
           </Typography>
 
           {minExp && (
-            <p>
+            <span>
               <span style={{ color: "gray" }}> Minimum Experience </span> <br />
               {minExp} years
-            </p>
+            </span>
           )}
           <div
             style={{
@@ -99,12 +97,16 @@ export const JobCard = ({ jd }) => {
               flexDirection: "column",
               justifyContent: "center",
               gap: "0.5rem",
+              width:'18rem',
+              
+              alignSelf:'center',
+              marginTop:'1rem',
             }}
           >
             <Button
               variant="contained"
               href={jdLink}
-              sx={{ bgcolor: "#5fe8d1", color: "black" }}
+              sx={{ bgcolor: "#54EFC3", color: "black" , borderRadius:'0.5rem',  textTransform:'none'}}
             >
               <ElectricBoltTwoToneIcon
                 sx={{ color: "yellow", marginRight: "0.5rem", font: "inherit" }}
@@ -113,7 +115,7 @@ export const JobCard = ({ jd }) => {
             </Button>
             <Button
               variant="contained"
-              sx={{ gap: "0.2rem" , backgroundColor:'blue'}}
+              sx={{ gap: "0.2rem" , backgroundColor:'#4943DA', borderRadius:'0.5rem', textTransform:'none'}}
               onClick={() => {
                 alert("clicked");
               }}
@@ -123,8 +125,11 @@ export const JobCard = ({ jd }) => {
               Unlock referral asks
             </Button>
           </div>
-        </Paper>
-      </Box>
+
+        </div>
+      
     </>
+  
+        
   );
 };
