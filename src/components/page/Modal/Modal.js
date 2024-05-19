@@ -1,8 +1,6 @@
 import { Avatar, Button, Typography } from "@mui/material";
 import ElectricBoltTwoToneIcon from "@mui/icons-material/ElectricBoltTwoTone";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
-import CloseIcon from '@mui/icons-material/Close';
-
 import "./modal.css";
 
 export const Modal = ({ jd ,onClose}) => {
@@ -26,7 +24,7 @@ export const Modal = ({ jd ,onClose}) => {
     return (
         <div className="modal-overlay" onClick={onClose}>
         <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-          <button className="close-button" onClick={onClose}><CloseIcon /></button>
+          <button className="close-button" onClick={onClose}>×</button>
           <div className="modalContainer" key={jdUid}>
             <div
               style={{

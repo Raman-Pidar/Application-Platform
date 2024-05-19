@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { fetchedData } from '../Data'
+import { filterJobs } from '../components/filter/filter'
 
 export const jdSlice = createSlice({
     name:'jd',
@@ -26,7 +27,11 @@ export const jdSlice = createSlice({
         ,
         handleFilterChange : (state, {payload}) => {
             console.log("filter applied",payload)
+            
              state.filters[payload.filterName] = payload.value
+
+             const filteredData = filterJobs(state.filters,state.jdState.jdList)
+             state.filteredState = filteredData
               
           }
     }

@@ -1,22 +1,22 @@
 
 .cardContainer{
     
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    border-radius: 2rem;
-    border: 1.5px solid rgb(218, 216, 216);
-    margin: 0.3rem;
-    padding: 1rem;
-    align-items: flex-start;
-    justify-content: space-around;
-    max-width: 18rem;
-    box-shadow: 1px 1px 1px 1px rgb(245, 240, 240);
-    p {
-      flex-grow: 2;
-      background: -webkit-linear-gradient(#000, #fff);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  border-radius: 1.5rem;
+  border: 1.5px solid rgb(218, 216, 216);
+  margin: 0.3rem;
+  padding: 1rem;
+  align-items: flex-start;
+  justify-content: space-around;
+  max-width: 18rem;
+  box-shadow: 1px 1px 1px 1px rgb(245, 240, 240);
+  p {
+    flex-grow: 2;
+    background: -webkit-linear-gradient(#000, #fff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
 }
 

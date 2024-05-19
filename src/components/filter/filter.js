@@ -17,19 +17,20 @@ export const filterJobs = (filters, jdList) => {
       }
       // Check numOfEmployees (the remote property is not coming in JSON response so just wrote placeholder)
       // Assuming numOfEmployees filter to be a range like "0-10", "10-20"
-      if (filters.numOfEmployees.length) {
+      //if (filters.numOfEmployees.length) {
         // if (job.numOfEmployees && !filters.numOfEmployees.some(range => checkRange(job.numOfEmployees, range))) {
         //   return false;
         // }
-      }
+     // }
+
       // Check minExp 
       if (filters.minExp && !(filters.minExp <=(job.maxExp) && (filters.minExp >=(job.minExp)))) {
         return false;
       }
       // Check remote (the remote property is not coming in JSON response so just wrote placeholder)
-      if (filters.remote.length && !filters.remote.includes(job.remote.toLowerCase())) {
-        return false;
-      }
+      // if (filters.remote.length && !filters.remote.includes(job.remote.toLowerCase())) {
+      //   return false;
+      // }
       // Check location
       if (filters.location.length && !filters.location.includes(job.location.toLowerCase())) {
         return false;
@@ -41,7 +42,7 @@ export const filterJobs = (filters, jdList) => {
         return false;
       }
       // Check companyName
-      if (filters.companyName && !filters.companyName.toLowerCase().includes(job.companyName.toLowerCase())) {
+      if (filters.companyName && !job.companyName.toLowerCase().includes(filters.companyName.toLowerCase())) {
         return false;
       }
       // All conditions met, include this job in the filtered array
@@ -51,7 +52,7 @@ export const filterJobs = (filters, jdList) => {
   };
 
 export const Filter=()=>{
-
+  
     const jdList = useSelector((state)=>(state.jdState.jdList))
     const filteredData = useSelector((state)=>(state.filteredState))
 
@@ -60,22 +61,25 @@ export const Filter=()=>{
     const dispatch = useDispatch();
 
       // Function to handle filter submission
-      const handleSubmit = () => {
+      // const handleSubmit = (action) => {
+      //   console.log("action",action)
+
+      //   dispatch(handleFilterChange(action))
         
-            const filteredData = filterJobs(filters,jdList)
-            console.log(filteredData)
-            dispatch(setFilteredData(filteredData))
-      };
+      //       const filteredData = filterJobs(filters,jdList)
+      //       console.log(filteredData)
+      //       dispatch(setFilteredData(filteredData))
+      // };
     
     return (
 
         <Stack useFlexGap flexWrap="wrap"
         direction='row' justifyContent='flex-start'
-        alignItems="center" spacing={1}  mb={2}
+        alignItems="center" spacing={1}  mb={4}
         >
-        <Autocomplete  sx={{ flexGrow:'1'}}
+        <Autocomplete  sx={{ flexGrow:'1', minWidth:'5rem'}}
             multiple
-            onChange={(e, value) => dispatch(handleFilterChange({filterName:'roles', value}))}
+            onChange={(e, value) =>dispatch(handleFilterChange({filterName:'roles', value})) }
             id="tags-outlined"
             options={ ['frontend', 'ios', 'android', 'tech lead', 'backend']}
             
@@ -85,12 +89,11 @@ export const Filter=()=>{
             renderInput={(params) => (
             <TextField
                 {...params}
-                label="roles"
-                placeholder="Roles"
+                label="Roles"
             />
             )}
         />
-        <Autocomplete sx={{ flexGrow:'2'}}
+        <Autocomplete sx={{ flexGrow:'2', minWidth:'13rem'}}
             multiple
             onChange={(e, value) => dispatch(handleFilterChange({filterName:'numOfEmployees', value}))}
             id="tags-outlinedd"
@@ -101,12 +104,11 @@ export const Filter=()=>{
             renderInput={(params) => (
             <TextField
                 {...params}
-                label="numOfEmployees"
-                placeholder="Number of Employees"
+                label="Number of Employees"
             />
             )}
         />
-        <Autocomplete sx={{ flexGrow:'1'}}
+        <Autocomplete sx={{ flexGrow:'1', minWidth:'5rem'}}
             disablePortal
             onChange={(e, value) => dispatch(handleFilterChange({filterName:'minExp', value}))}
             id="tags-outlined"
@@ -118,12 +120,11 @@ export const Filter=()=>{
             renderInput={(params) => (
             <TextField
                 {...params}
-                label="minExp"
-                placeholder="Experience"
+                label="Experience"
             />
             )}
         />
-        <Autocomplete  sx={{ flexGrow:'1'}}
+        <Autocomplete  sx={{ flexGrow:'1', minWidth:'5rem'}}
             multiple
             onChange={(e, value) => dispatch(handleFilterChange({filterName:'remote', value}))}
             id="tags-outlined"
@@ -134,12 +135,11 @@ export const Filter=()=>{
             renderInput={(params) => (
             <TextField
                 {...params}
-                label="remote"
-                placeholder="remote"
+                label= "Remote"
             />
             )}
         />
-           <Autocomplete  sx={{ flexGrow:'1'}}
+           <Autocomplete  sx={{ flexGrow:'1', minWidth:'5rem'}}
             multiple
             onChange={(e, value) => dispatch(handleFilterChange({filterName:'location', value}))}
             id="tags-outlined"
@@ -150,27 +150,26 @@ export const Filter=()=>{
             renderInput={(params) => (
             <TextField
                 {...params}
-                label="location"
-                placeholder="Location"
+                label= "Location"
             />
             )}
         />
-         <Autocomplete sx={{ flexGrow:'1'}}
+         <Autocomplete sx={{ flexGrow:'1', minWidth:'13rem'}}
             disablePortal
             onChange={(e,value ) => dispatch(handleFilterChange({filterName:'minJdSalary',value }))}
             id="tags-outlined"
             options={["0 L", "10 L", "20 L", "30 L", "40 L", "50 L", "60 L", "70 L"] }
             renderInput={(params) => 
-                <TextField {...params} label="minJdSalary" placeholder="Minimum Base Salary" />}
+                <TextField {...params} label ="Minimum Base Salary" />}
         />
-        <Autocomplete  sx={{ flexGrow:'2'}}
+        <Autocomplete  sx={{ flexGrow:'2', minWidth:'13rem'}}
             onChange={(e ,value) => dispatch(handleFilterChange({filterName:'companyName',value}))}
             id="company-name"
             freeSolo
             options={[]}
-            renderInput={(params) => <TextField {...params} label="companyName" placeholder="Search Company Name" />}
+            renderInput={(params) => <TextField {...params} label ="Search Company Name" />}
         />
-        <Button onClick={handleSubmit}>Filter</Button>
+        {/* <Button onClick={handleSubmit}>Filter</Button> */}
      </Stack>
      
   );

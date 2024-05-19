@@ -18,7 +18,6 @@ function App() {
 
   const dispatch = useDispatch();
 
-  // recursive fetch function for infinite scrolling
    const fetchMoreData = async (filters) => {
 
       try {
@@ -69,7 +68,7 @@ function App() {
         });
   
         const requestOptions = {
-          //this API does not allow for GET call 
+          //this API does not allow for GET call rather POST
           method: "POST",
           headers: myHeaders,
           body
