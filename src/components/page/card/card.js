@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Avatar, Button, Typography } from "@mui/material";
 import ElectricBoltTwoToneIcon from "@mui/icons-material/ElectricBoltTwoTone";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
+import {Modal} from "../Modal/Modal"
 import "./card.css";
 export const JobCard = ({ jd }) => {
   const {
@@ -127,7 +128,7 @@ export const JobCard = ({ jd }) => {
           </div>
 
         </div>
-      
+      {isModalOpen && <Modal jd={jd} onClose={onClose}/>}
     </>
   
         
