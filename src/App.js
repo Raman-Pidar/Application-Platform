@@ -6,6 +6,7 @@ import { useSelector,useDispatch } from 'react-redux';
 import { setFetchedData, setFilteredData } from './features/slice';
 import InfiniteScroll from "react-infinite-scroll-component";
 import { filterJobs } from './components/filter/filter';
+import ManageSearchOutlinedIcon from '@mui/icons-material/ManageSearchOutlined';
 
 function App() {
 
@@ -98,7 +99,11 @@ function App() {
       {filteredData  && <JobListPage jdList={filteredData.jdList}/>}
 
        {hasMore ? " ": 
-       (filters.length>0 && filteredData.jdList.length===0 ?" ":
+       ( filteredData.jdList.length===0 ? 
+          <span style={{display:'flex', justifyContent:'center', margin:'2rem', fontSize:"2rem"}}>
+            <ManageSearchOutlinedIcon sx={{fontSize:'2rem'}}/> No matching results 
+            </span>
+          :
           <span style={{display:'flex', justifyContent:'center', margin:'2rem', fontSize:"2rem"}}>
             That's all for now...
             </span>)
