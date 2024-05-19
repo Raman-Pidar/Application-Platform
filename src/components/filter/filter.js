@@ -155,6 +155,7 @@ export const Filter=()=>{
             onChange={(e ,value) => dispatch(handleFilterChange({filterName:'companyName',value}))}
             id="company-name"
             freeSolo
+            autoSelect
             options={[]}
             renderInput={(params) => <TextField {...params} label ="Search Company Name" />}
         />

@@ -75,17 +75,26 @@ export const JobCard = ({ jd }) => {
           <Typography variant="h6" component="body">
             About Company:
           </Typography>
-          <Typography variant="subtitle2" component="body" sx={{flexGrow:'2'}}>
+          <Typography variant="subtitle2" component="body" sx={{flexGrow:'2',  position: 'relative'}}>
             <b> About us </b>
             <br />
             <p>
-            {jobDetailsFromCompany.slice(0,300)}</p>
-              <span>
-                <Button onClick={openModal} sx={{textTransform:'none',justifyContent: "center" }}>
-                  View job</Button>
-              </span>
+            {jobDetailsFromCompany.slice(0,300)}
+            </p>
+            <span style={{
+              position: 'absolute',
+              bottom: '15px',
+              left:'7rem',
+              cursor: 'pointer',
+            }}>
+                <Button onClick={openModal}  sx={{textTransform:'none' }}>
+                  View job
+                </Button>
+            </span>
+            
           </Typography>
 
+          
           {minExp && (
             <span>
               <span style={{ color: "gray" }}> Minimum Experience </span> <br />
