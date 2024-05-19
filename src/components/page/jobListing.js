@@ -12,10 +12,10 @@ console.log("joblistpage" ,prop)
                 <JobCard jd={jd}/>
 
                 )}
-                {list.length===0?
-                <h1>
+                {list.length===0? 
+                <span style={{display:'flex', justifyContent:'center', margin:'2rem', fontSize:"2rem"}}>
                 <ManageSearchOutlinedIcon sx={{fontSize:'2rem'}}/> No matching results 
-                </h1>
+                </span>
                 :""}
           </div>
          

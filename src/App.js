@@ -97,7 +97,12 @@ function App() {
       <Filter />
       {filteredData  && <JobListPage jdList={filteredData.jdList}/>}
 
-      { hasMore ? " ": <h1 style={{display:'flex', justifyContent:'center', margin:'2rem'}}>That's all for now...</h1>}
+       {hasMore ? " ": 
+       (filters.length>0 && filteredData.jdList.length===0 ?" ":
+          <span style={{display:'flex', justifyContent:'center', margin:'2rem', fontSize:"2rem"}}>
+            That's all for now...
+            </span>)
+       }
     </div> 
     </InfiniteScroll>
          
