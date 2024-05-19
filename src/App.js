@@ -45,7 +45,8 @@ function App() {
         //set state for filtered data
         const filterData = filterJobs(filters , newData.jdList)
         dispatch(setFilteredData(filterData))
-        res.data.length > 0 ? setHasMore(true) : setHasMore(false);
+        res.jdList.length > 0 ? setHasMore(true) : setHasMore(false);
+        console.log('hasMore',hasMore)
       } catch (error) {
         console.error(error);
       }
@@ -95,6 +96,8 @@ function App() {
     <div className='app'>
       <Filter />
       {filteredData  && <JobListPage jdList={filteredData.jdList}/>}
+
+      { hasMore ? " ": <h1 style={{display:'flex', justifyContent:'center', margin:'2rem'}}>That's all for now...</h1>}
     </div> 
     </InfiniteScroll>
          
