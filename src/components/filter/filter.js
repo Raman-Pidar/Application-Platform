@@ -3,11 +3,12 @@ import * as React from 'react';
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
-import { useState } from 'react';
-import { Button } from '@mui/material';
-import { useSelector,useDispatch } from 'react-redux';
-import {  setFilteredData , handleFilterChange} from '../../features/slice'
+import Tooltip from '@mui/material/Tooltip';
 
+import { useSelector,useDispatch } from 'react-redux';
+import {  handleFilterChange} from '../../features/slice'
+
+// filter out jds based on filters
 export const filterJobs = (filters, jdList) => {
     console.log(filters,jdList)
     const filteredArray = jdList.filter(job => {
@@ -52,24 +53,8 @@ export const filterJobs = (filters, jdList) => {
   };
 
 export const Filter=()=>{
-  
-    const jdList = useSelector((state)=>(state.jdState.jdList))
-    const filteredData = useSelector((state)=>(state.filteredState))
-
-    const filters = useSelector((state)=>(state.filters))
 
     const dispatch = useDispatch();
-
-      // Function to handle filter submission
-      // const handleSubmit = (action) => {
-      //   console.log("action",action)
-
-      //   dispatch(handleFilterChange(action))
-        
-      //       const filteredData = filterJobs(filters,jdList)
-      //       console.log(filteredData)
-      //       dispatch(setFilteredData(filteredData))
-      // };
     
     return (
 
@@ -93,6 +78,7 @@ export const Filter=()=>{
             />
             )}
         />
+        <Tooltip title="Dummy Filter">
         <Autocomplete sx={{ flexGrow:'2', minWidth:'13rem'}}
             multiple
             onChange={(e, value) => dispatch(handleFilterChange({filterName:'numOfEmployees', value}))}
@@ -108,6 +94,7 @@ export const Filter=()=>{
             />
             )}
         />
+        </Tooltip>
         <Autocomplete sx={{ flexGrow:'1', minWidth:'5rem'}}
             disablePortal
             onChange={(e, value) => dispatch(handleFilterChange({filterName:'minExp', value}))}
@@ -124,6 +111,7 @@ export const Filter=()=>{
             />
             )}
         />
+        <Tooltip title="Dummy Filter">
         <Autocomplete  sx={{ flexGrow:'1', minWidth:'5rem'}}
             multiple
             onChange={(e, value) => dispatch(handleFilterChange({filterName:'remote', value}))}
@@ -139,6 +127,7 @@ export const Filter=()=>{
             />
             )}
         />
+        </Tooltip>
            <Autocomplete  sx={{ flexGrow:'1', minWidth:'5rem'}}
             multiple
             onChange={(e, value) => dispatch(handleFilterChange({filterName:'location', value}))}
