@@ -13,7 +13,8 @@ export const filterJobs = (filters, jdList) => {
     console.log(filters,jdList)
     const filteredArray = jdList.filter(job => {
       // Check roles
-      if (filters.roles.length && !filters.roles.includes(job.jobRole)) {
+      if (filters.roles.length && !filters.roles.some(filter => filter.value === job.jobRole.toLowerCase()))
+        {
         return false;
       }
       // Check numOfEmployees (the remote property is not coming in JSON response so just wrote placeholder)
@@ -33,7 +34,9 @@ export const filterJobs = (filters, jdList) => {
       //   return false;
       // }
       // Check location
-      if (filters.location.length && !filters.location.includes(job.location.toLowerCase())) {
+      if (filters.location.length && 
+        !filters.location.some(filter => filter.value === job.location.toLowerCase())) 
+      {
         return false;
       }
       // Check minJdSalary
@@ -62,11 +65,19 @@ export const Filter=()=>{
         direction='row' justifyContent='flex-start'
         alignItems="center" spacing={1}  mb={4}
         >
-        <Autocomplete  sx={{ flexGrow:'1', minWidth:'5rem'}}
+        <Autocomplete  sx={{ flexGrow:'1', minWidth:'7rem'}}
             multiple
             onChange={(e, value) =>dispatch(handleFilterChange({filterName:'roles', value})) }
             id="tags-outlined"
-            options={ ['frontend', 'ios', 'android', 'tech lead', 'backend']}
+            options={ 
+                      [
+                      { label: 'Frontend', value: 'frontend' },
+                      { label: 'IOS', value: 'ios' },
+                      { label: 'Android', value: 'android' },
+                      { label: 'Tech Lead', value: 'tech lead' },
+                      { label: 'Backend', value: 'backend' }
+                    ]
+            }
             
             // getOptionLabel={(option) => option.title}
             // defaultValue={}
@@ -95,7 +106,7 @@ export const Filter=()=>{
             )}
         />
         </Tooltip>
-        <Autocomplete sx={{ flexGrow:'1', minWidth:'5rem'}}
+        <Autocomplete sx={{ flexGrow:'1', minWidth:'7rem'}}
             disablePortal
             onChange={(e, value) => dispatch(handleFilterChange({filterName:'minExp', value}))}
             id="tags-outlined"
@@ -112,7 +123,7 @@ export const Filter=()=>{
             )}
         />
         <Tooltip title="Dummy Filter">
-        <Autocomplete  sx={{ flexGrow:'1', minWidth:'5rem'}}
+        <Autocomplete  sx={{ flexGrow:'1', minWidth:'7rem'}}
             multiple
             onChange={(e, value) => dispatch(handleFilterChange({filterName:'remote', value}))}
             id="tags-outlined"
@@ -128,11 +139,19 @@ export const Filter=()=>{
             )}
         />
         </Tooltip>
-           <Autocomplete  sx={{ flexGrow:'1', minWidth:'5rem'}}
+           <Autocomplete  sx={{ flexGrow:'1', minWidth:'7rem'}}
             multiple
             onChange={(e, value) => dispatch(handleFilterChange({filterName:'location', value}))}
             id="tags-outlined"
-            options={['delhi ncr', 'mumbai', 'remote', 'chennai', 'bangalore']}
+            options={
+                      [
+                      { label: 'Delhi NCR', value: 'delhi ncr' },
+                      { label: 'Mumbai', value: 'mumbai' },
+                      { label: 'Remote', value: 'remote' },
+                      { label: 'Chennai', value: 'chennai' },
+                      { label: 'Bangalore', value: 'bangalore' }
+                    ]
+            }
             // getOptionLabel={(option) => option.title}
             // defaultValue={}
             filterSelectedOptions
