@@ -2,29 +2,38 @@ import { Avatar, Button, Typography } from "@mui/material";
 import ElectricBoltTwoToneIcon from "@mui/icons-material/ElectricBoltTwoTone";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
 import "./modal.css";
+import { useLocation, useParams,useNavigate } from 'react-router-dom';
 
-export const Modal = ({ jd ,onClose}) => {
+export const Modal = () => {
+
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const location = useLocation();
+
     const {
       companyName,
       jdLink,
       jdUid,
       jobDetailsFromCompany,
       jobRole,
-      location,
+      // location ,
       logoUrl,
       maxExp,
       maxJdSalary,
       minExp,
       minJdSalary,
       salaryCurrencyCode,
-    } = jd;
+    } = location.state || {};
 
+  const closeModal = () => {
+    navigate(-1); // Go back to the previous route
+  };
  
   
     return (
-        <div className="modal-overlay" onClick={onClose}>
+        <div className="modal-overlay" onClick={closeModal}>
         <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-          <button className="close-button" onClick={onClose}>×</button>
+          <button className="close-button" onClick={closeModal}>×</button>
           <div className="modalContainer" key={jdUid}>
             <div
               style={{
@@ -51,7 +60,7 @@ export const Modal = ({ jd ,onClose}) => {
                 </span>
                 <span style={{ fontSize: "0.8rem" }}>
                   {" "}
-                  <b>{location.toUpperCase()}</b>
+                  {/* <b>{location.toUpperCase()}</b> */}
                 </span>
               </div>
             </div>

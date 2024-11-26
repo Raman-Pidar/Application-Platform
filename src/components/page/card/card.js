@@ -5,6 +5,7 @@ import ElectricBoltTwoToneIcon from "@mui/icons-material/ElectricBoltTwoTone";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
 import {Modal} from "../Modal/Modal"
 import "./card.css";
+import { Link } from "react-router-dom";
 export const JobCard = ({ jd }) => {
   const {
     companyName,
@@ -87,9 +88,10 @@ export const JobCard = ({ jd }) => {
               left:'7rem',
               cursor: 'pointer',
             }}>
-                <Button onClick={openModal}  sx={{textTransform:'none' }}>
+                {/* <Button onClick={openModal}  sx={{textTransform:'none' }}>
                   View job
-                </Button>
+                </Button> */}
+                 <Link to={`/job/${jd.jdUid}`} state={jd}>view job</Link>
             </span>
             
           </Typography>
@@ -137,7 +139,7 @@ export const JobCard = ({ jd }) => {
           </div>
 
         </div>
-      {isModalOpen && <Modal jd={jd} onClose={onClose}/>}
+      {/* {isModalOpen && <Modal jd={jd} onClose={onClose}/>} */}
     </>
   
         
